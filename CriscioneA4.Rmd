@@ -1,0 +1,66 @@
+---
+title: "CriscioneA4"
+author: "Anthony Criscione"
+date: "9/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+## 1.
+
+```{r}
+ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram(binwidth = 0.1) +
+  labs(title = "Sepal Length Distribution", x = "Sepal Length", y = "Count")
+
+ggplot(iris, aes(Sepal.Width)) +
+  geom_histogram(binwidth = 0.1) +
+  labs(title = "Sepal Width Distribution", x = "Sepal Width", y = "Count")
+```
+
+The sepal lengths are mostly clustered around 5.0 - 6.7 cm, with groups around 5 cm and 6 cm. Sepal lengths shorter than 4.4 cm or longer than 7.7 cm are uncommon or nonexistent.
+
+The sepal widths are heavily clustered around 3 cm (roughly 2.8 - 3.2 cm), with 3.0 cm being significantly more common than the rest. Sepal widths thinner than 2.2 cm and wider than 4.2 cm are uncommon or nonexistent.
+
+
+## 2. 
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length, color = Species)) +
+  geom_freqpoly(binwidth = 0.1) +
+  labs(title = "Sepal Length Distribution by Species",
+       x = "Sepal Length", y = "Count")
+
+ggplot(iris, aes(x = Sepal.Width, color = Species)) +
+  geom_freqpoly(binwidth = 0.1) +
+  labs(title = "Sepal Width Distribution by Species",
+       x = "Sepal Width", y = "Count")
+```
+
+The setosa species sepal lengths are the shortest (clustered around 5 cm, roughly 4.6 - 5.4 cm), the versicolor species are in the middle (clustered around 5.5 - 6.7 cm), and the virginica species are the longest (clustered around 6.3 - 7.7 cm).
+
+The setosa species sepal widths are the widest (clustered around 3.0 - 3.8 cm), the versicolor species are the thinnest (clustered around 2.5 - 3.0 cm), and the virginica species are in the middle (clustered around 2.8 - 3.2 cm).
+
+The pattern seen in the first exploration that sepal lengths were generally distributed around 5.0 - 6.7 cm can be further explained in the first graph. The highest peaks of all 3 species are within this range. The grouping around specifically 5 and 6 cm can also be seen in the first graph; the setosa graph is heavily clustered around 5 cm, and the versicolor and virginica species are clustered around 6 cm.
+
+The pattern seen in the first exploration regarding sepal widths of 3.0 cm being much more common than the rest can be explained in the second graph. The highest point of both the virginica and versicolor species and the second-highest point of the setosa species are all at 3.0 cm. The cluster of many high points around 2.8 - 3.2 cm also points back to the clustering observed in the first exploration.
+
+
+## 3. 
+```{r}
+filter(iris, Species == "virginica") %>%
+  ggplot(aes(Sepal.Width)) +
+  geom_histogram(binwidth = 0.1) +
+  labs(title = "Virginica Sepal Width Distribution", 
+       x = "Sepal Width", y = "Count")
+```
+
+The virginica species contributed largely to the abundance of 3.0 cm sepal widths in the first exploration; 12 out of the total 26, almost half. As seen in the second exploration, the widths are mostly clustered around 2.8 - 3.2 cm. In general, sepal widths less than 2.5 cm or greater than 3.5 cm seem to be uncommon in the virginica species.
