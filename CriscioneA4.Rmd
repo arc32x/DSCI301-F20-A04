@@ -13,6 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+<span style="color: green; font-size: 14pt">*Comments:*  
+        * Everything in here looks pretty good, except I think you are choosing your binwidths a bit too small.  (See below.)
+    </span>
 
 ## 1.
 
@@ -25,6 +28,19 @@ ggplot(iris, aes(Sepal.Width)) +
   geom_histogram(binwidth = 0.1) +
   labs(title = "Sepal Width Distribution", x = "Sepal Width", y = "Count")
 ```
+
+
+  <span style="color: green; font-size: 14pt">*Comments:*  
+  * The spikes on this suggest to me that you might want to think about using a larger binwidth. This might be a bit too granular.
+  I played around with a few values and I think I might like about 0.3. </span>
+  
+```{r}
+ggplot(iris, aes(Sepal.Width)) +
+  geom_histogram(binwidth = 0.3) +
+  labs(title = "Sepal Width Distribution: Rebinned", x = "Sepal Width", y = "Count")
+```
+  
+
 
 The sepal lengths are mostly clustered around 5.0 - 6.7 cm, with groups around 5 cm and 6 cm. Sepal lengths shorter than 4.4 cm or longer than 7.7 cm are uncommon or nonexistent.
 
@@ -45,6 +61,20 @@ ggplot(iris, aes(x = Sepal.Width, color = Species)) +
        x = "Sepal Width", y = "Count")
 ```
 
+<span style="color: green; font-size: 14pt">*Comments:*  
+        * I really like the use of the frequency polygon here, but it still looks 
+        too granular.  (Notice how busy the polygons look.)
+        I think .35 helps separate these a bit: 
+    </span>
+```{r}
+ggplot(iris, aes(x = Sepal.Width, color = Species)) +
+  geom_freqpoly(binwidth = 0.35) +
+  labs(title = "Sepal Width Distribution by Species",
+       x = "Sepal Width", y = "Count")
+```
+    
+    
+
 The setosa species sepal lengths are the shortest (clustered around 5 cm, roughly 4.6 - 5.4 cm), the versicolor species are in the middle (clustered around 5.5 - 6.7 cm), and the virginica species are the longest (clustered around 6.3 - 7.7 cm).
 
 The setosa species sepal widths are the widest (clustered around 3.0 - 3.8 cm), the versicolor species are the thinnest (clustered around 2.5 - 3.0 cm), and the virginica species are in the middle (clustered around 2.8 - 3.2 cm).
@@ -64,3 +94,7 @@ filter(iris, Species == "virginica") %>%
 ```
 
 The virginica species contributed largely to the abundance of 3.0 cm sepal widths in the first exploration; 12 out of the total 26, almost half. As seen in the second exploration, the widths are mostly clustered around 2.8 - 3.2 cm. In general, sepal widths less than 2.5 cm or greater than 3.5 cm seem to be uncommon in the virginica species.
+
+<span style="color: green; font-size: 14pt">*Comments:*  
+        * All fair observations.  Looks good to me!
+    </span>
